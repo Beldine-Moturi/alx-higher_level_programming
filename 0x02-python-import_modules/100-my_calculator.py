@@ -9,7 +9,7 @@ if __name__ == "__main__":
     if sys.argv[2] not in ["+", "-", "*", "/"]:
         print("Unknown operator. Available operators: +, -, * and /")
         exit(1)
-    result = "{} {} {} = ".format(sys.argv[1], sys.argv[2], sys.argv[3])
+    result = "{} {} {} =".format(sys.argv[1], sys.argv[2], sys.argv[3])
     if sys.argv[2] == '+':
         print(result, "{}".format(int(sys.argv[1]) + int(sys.argv[3])))
     elif sys.argv[2] == '-':
