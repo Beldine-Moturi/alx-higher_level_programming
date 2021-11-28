@@ -17,4 +17,4 @@ if __name__ == "__main__":
     elif sys.argv[2] == '*':
         print(result, "{}".format(int(sys.argv[1]) * int(sys.argv[3])))
     elif sys.argv[2] == '/':
-        print(result, "{}".format(int(sys.argv[1]) / int(sys.argv[3])))
+        print(result, "{:.0f}".format(int(sys.argv[1]) / int(sys.argv[3])))
