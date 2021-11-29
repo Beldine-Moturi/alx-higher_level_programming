@@ -3,5 +3,10 @@ def best_score(a_dictionary):
     """return key with biggest int value"""
     if a_dictionary is None:
         return None
-    my_list = sorted(list(a_dictionary.values()))
-    return (my_list[len(my_list) - 1])
+    key = list(a_dictionary.keys())[0]
+    val = a_dictionary[key]
+    for i, j in a_dictionary.items():
+        if j > val:
+            key = i
+            val = j
+    return key
