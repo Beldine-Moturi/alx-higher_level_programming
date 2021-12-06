@@ -1,4 +1,4 @@
-#!/usr/bin/python2
+#!/usr/bin/python3
 def list_division(my_list_1, my_list_2, list_length):
     """divides items in two lists"""
     new_list = []
