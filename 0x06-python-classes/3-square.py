@@ -21,4 +21,4 @@ class Square:
 
         def area(self):
             """Returns the current area of the square instance"""
-            return (self.__size * self.__size)
+            return (self.__size ** 2)
