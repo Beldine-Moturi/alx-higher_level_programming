@@ -2,6 +2,8 @@
 """
 This module defines a class Square
 """
+
+
 class Square:
     """Describes a class Square"""
 
