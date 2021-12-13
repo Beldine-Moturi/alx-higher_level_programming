@@ -1,0 +1,57 @@
+===============================
+ The 0-add_integer module
+ ===============================
+
+This files contains test cases for the function ``add_integer()``
+
+
+Numbers
+========
+``add_integer`` returns the sum of its arguments, with a default of 98 for
+the second argument if none is provided
+Similar to using the '+' operator on numbers
+
+>>> add_integer = __import__('0-add_integer').add_integer
+>>> add_integer(6, 4)
+10
+
+Also works with negative numbers
+
+>>> add_integer(5, -2)
+3
+
+Also works with one argument provided(98 will be used as a default for the 2nd)
+
+>>> add_integer(2)
+100
+
+Also works with floats(will be casted to int)
+
+>>> add_integer(98.3, 2)
+100
+
+
+
+Non-Numbers
+===========
+Arguments to ``add_integer()`` must be either of type int or float
+other types will raise an error
+
+
+string:
+
+>>> add_integer('school', 5) #doctest: +ELLIPSIS
+Traceback (most recent call last):
+TypeError: ... must be an integer
+
+boolean:
+
+>>> add_integer(True, 5) #doctest: +ELLIPSIS
+Traceback (most recent call last):
+TypeError: ... must be an integer
+
+calling the function without any arguments also raises an error
+
+>>> add_integer()
+Traceback (most recent call last):
+TypeError: add_integer() missing 1 required positional argument: 'a'
