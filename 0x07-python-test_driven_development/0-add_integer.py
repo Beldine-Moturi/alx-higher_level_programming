@@ -13,12 +13,8 @@ def add_integer(a, b=98):
     >>> add_integer(10, 15)
     25
     """
-    my_list = [a, b]
-    result = 0
-    for i in my_list:
-        if type(i) not in [int, float]:
-            raise TypeError("{} must be an integer".format(i))
-        if type(i) == float:
-            i = int(i)
-        result += i
-    return result
+    if type(a) not in [int, float]:
+        raise TypeError('a must be an integer')
+    if type(b) not in [int, float]:
+        raise TypeError('b must be an integer')
+    return (int(a) + int(b))
