@@ -68,7 +68,7 @@ class SinglyLinkedList:
         my_str = ""
         while self.__head is not None:
             my_str += str(self.__head.data)
-            if self.__head.next_node != None:
+            if self.__head.next_node is not None:
                 my_str += '\n'
             self.__head = self.__head.next_node
         return ("".join(my_str))
