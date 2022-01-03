@@ -72,7 +72,8 @@ class Rectangle:
             return ""
         my_rec = []
         for i in range(self.__height):
-            [my_rec.append(str(self.print_symbol)) for n in range(self.__width)]
+            symbol = str(self.print_symbol)
+            [my_rec.append(symbol) for n in range(self.__width)]
             if i != (self.__height - 1):
                 my_rec.append('\n')
         return ("".join(my_rec))
