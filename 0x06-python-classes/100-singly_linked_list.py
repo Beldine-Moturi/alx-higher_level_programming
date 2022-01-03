@@ -66,7 +66,7 @@ class SinglyLinkedList:
     def __str__(self):
         """prints the SinglyLinkedList to stdout, one Node number per line"""
         my_str = ""
-        while self.__head != None:
+        while self.__head is not None:
             my_str += str(self.__head.data)
             if self.__head.next_node != None:
                 my_str += '\n'
