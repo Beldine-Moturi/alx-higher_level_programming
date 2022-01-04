@@ -9,9 +9,9 @@ class MyList(list):
         """prints the list, but sorted (ascending sort)
         assuming all elements of the list are of type int"""
         my_list = self[:]
-        for i in range(len(my_list) - 1):
-            if my_list[i] > my_list[i+1]:
-                tmp = my_list[i]
-                my_list[i] = my_list[i+1]
-                my_list[i+1] = tmp
+        x = len(my_list)
+        for i in range(x):
+            for n in range(0, x-i-1):
+                if (my_list[n] > my_list[n+1]):
+                    my_list[n], my_list[n+1] = my_list[n+1], my_list[n]
         print(my_list)
