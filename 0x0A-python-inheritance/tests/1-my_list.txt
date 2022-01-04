@@ -139,7 +139,7 @@ Note that lists of strings are sorted lexographically.
 ::
 
     >>> my_list.print_sorted()
-    ['Brennan', 'Poppy', 'Holberton', 'Betty', 'School']
+    ['Betty', 'Brennan', 'Holberton', 'Poppy', 'School']
 
 Another friendly reminder that the original list is unaltered :)
 
