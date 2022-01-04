@@ -1,10 +1,17 @@
 #!/usr/bin/python3
-"""Defines an inherited list class MyList."""
+"""Defines a class MyList that inherits from List"""
 
 
 class MyList(list):
-    """Implements sorted printing for the built-in list class."""
+    """Description for the class MyList"""
 
     def print_sorted(self):
-        """Print a list in sorted ascending order."""
-        print(sorted(self))
+        """prints the list, but sorted (ascending sort)
+        assuming all elements of the list are of type int"""
+        my_list = self[:]
+        for i in range(len(my_list) - 1):
+            if my_list[i] > my_list[i+1]:
+                tmp = my_list[i]
+                my_list[i] = my_list[i+1]
+                my_list[i+1] = tmp
+        print(my_list)
