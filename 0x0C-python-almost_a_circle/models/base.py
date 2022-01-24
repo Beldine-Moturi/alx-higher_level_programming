@@ -3,7 +3,11 @@
 
 
 class Base:
-    """Description for objects of the class"""
+    """Base - the base class for all classes in this project
+            - manages the id attribute in all future classes
+    Attributes:
+        __nb_objects (int): the number of Instantiated objects
+    """
 
     __nb_objects = 0
 
@@ -13,8 +17,9 @@ class Base:
         Args:
             id (int): the id of the object
         """
+
         if id is not None:
             self.id = id
         else:
-            self.__class__.__nb_objects += 1
-            self.id = self.__class__.__nb_objects
+            Base.__nb_objects += 1
+            self.id = Base.__nb_objects
