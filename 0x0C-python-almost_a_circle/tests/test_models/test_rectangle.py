@@ -79,3 +79,46 @@ class TestRectangleInstantiation(unittest.TestCase):
         self.assertEqual(self.Rect6.height, 46)
         self.assertEqual(self.Rect6.x, 8)
         self.assertEqual(self.Rect6.y, 9)
+
+class TestAttributeValues(unittest.TestCase):
+    """Tests that the correct values are assigned for Rectangle
+    instance attributes, and that appropriate exceptions are
+    raised otherwise"""
+
+    def test_width_value(self):
+        """Tests that the appropriate exceptions are raised if the width
+        attribute is not an integer or is not greater than 0"""
+
+        with self.assertRaisesRegex(TypeError, 'width must be an integer'):
+            Rectangle("10", 15, 3, 4)
+        with self.assertRaisesRegex(ValueError, 'width must be > 0'):
+            Rectangle(-5, 6, 1, 2)
+            Rectangle(0, 5, 1, 2)
+
+    def test_height_value(self):
+        """Tests that the appropriate exceptions are raised if the height
+        attribute is not an integer or is not greater than 0"""
+
+        with self.assertRaisesRegex(TypeError, 'height must be an integer'):
+            Rectangle(10, "15", 3, 4)
+        with self.assertRaisesRegex(ValueError, 'height must be > 0'):
+            Rectangle(12, -10, 1, 2)
+            Rectangle(15, 0, 1, 2)
+
+    def test_x_value(self):
+        """Tests whether appropriate exceptions are raised if the x value
+        is not an integer or is less than 0"""
+
+        with self.assertRaisesRegex(TypeError, 'x must be an integer'):
+            Rectangle(10, 12, "3", 4)
+        with self.assertRaisesRegex(ValueError, 'x must be >= 0'):
+            Rectangle(10, 15, -3, 4)
+
+    def test_y_value(self):
+        """Tests whether the appropriate exceptions are raised if the y value
+        is not an integer or is less than 0"""
+
+        with self.assertRaisesRegex(TypeError, 'y must be an integer'):
+            Rectangle(10, 12, 3, "4")
+        with self.assertRaisesRegex(ValueError, 'y must be >= 0'):
+            Rectangle(12, 15, 3, -4)
