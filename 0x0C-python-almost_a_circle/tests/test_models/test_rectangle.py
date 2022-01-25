@@ -24,6 +24,7 @@ class TestRectangleInstantiation(unittest.TestCase):
 
         with self.assertRaises(TypeError):
             Rectangle()
+        with self.assertRaises(TypeError):
             Rectangle(20)
 
     def test_optional_positional_attributes(self):
@@ -93,7 +94,8 @@ class TestAttributeValues(unittest.TestCase):
             Rectangle("10", 15, 3, 4)
         with self.assertRaisesRegex(ValueError, 'width must be > 0'):
             Rectangle(-5, 6, 1, 2)
-            Rectangle(0, 5, 1, 2)
+        with self.assertRaisesRegex(ValueError, 'width must be > 0'):
+            Rectangle(0, 15, 3, 4)
 
     def test_height_value(self):
         """Tests that the appropriate exceptions are raised if the height
@@ -103,7 +105,8 @@ class TestAttributeValues(unittest.TestCase):
             Rectangle(10, "15", 3, 4)
         with self.assertRaisesRegex(ValueError, 'height must be > 0'):
             Rectangle(12, -10, 1, 2)
-            Rectangle(15, 0, 1, 2)
+        with self.assertRaisesRegex(ValueError, 'height must be > 0'):
+            Rectangle(12, 0, 1, 2)
 
     def test_x_value(self):
         """Tests whether appropriate exceptions are raised if the x value
