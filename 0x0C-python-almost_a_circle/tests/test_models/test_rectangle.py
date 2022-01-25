@@ -32,6 +32,8 @@ class TestRectangleInstantiation(unittest.TestCase):
         is provided"""
 
         self.Rect2 = Rectangle(24, 12)
+        self.assertEqual(self.Rect2.width, 24)
+        self.assertEqual(self.Rect2.height, 12)
         self.assertEqual(self.Rect2.x, 0)
         self.assertEqual(self.Rect2.y, 0)
 
