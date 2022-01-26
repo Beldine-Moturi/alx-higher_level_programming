@@ -141,13 +141,16 @@ class TestRectangleMethods(unittest.TestCase):
         self.assertEqual(Rectangle(4, 5, 1, 2, 12).area(), 4 * 5)
 
     @staticmethod
-    def capture_stdout(rect):
+    def capture_stdout(rect, method):
         """Captures what is printed to the standard output
         by Rectangle methods that print to the standard output"""
 
         captured_output = io.StringIO()
         with redirect_stdout(captured_output):
-            rect.display()
+            if method == "print":
+                print(rect)
+            else:
+                rect.display()
         return (captured_output.getvalue())
 
     def test_display_method(self):
@@ -155,5 +158,23 @@ class TestRectangleMethods(unittest.TestCase):
         representation to the standard output"""
 
         self.r1 = Rectangle(3, 2, 0, 0)
-        self.assertEqual(TestRectangleMethods.capture_stdout(self.r1),
-                         '###\n###\n')
+        self.assertEqual(TestRectangleMethods.capture_stdout(self.r1, "display")
+                         , '###\n###\n')
+
+    def test_str_method(self):
+        """Tests that the __str__ methods prints the expected representation
+        of the Rectangle instance"""
+
+        r1 = Rectangle(4, 5)
+        r2 = Rectangle(3, 4, 1)
+        r3 = Rectangle(5, 6, 1, 2)
+        r4 = Rectangle(3, 4, 1, 1, 12)
+
+        self.assertEqual(TestRectangleMethods.capture_stdout(r1, "print"),
+                         "[Rectangle] (r1.id) 0/0 - 4/5")
+        self.assertEqual(TestRectangleMethods.capture_stdout(r2, "print"),
+                         "[Rectangle] (r2.id) 1/0 - 3/4")
+        self.assertEqual(TestRectangleMethods.capture_stdout(r3, "print"),
+                         "[Rectangle] (r3.id) 1/2 - 5/6")
+        self.assertEqual(TestRectangleMethods.capture_stdout(r4, "print"),
+                         "[Rectangle] (12) 1/1 - 3/4")
