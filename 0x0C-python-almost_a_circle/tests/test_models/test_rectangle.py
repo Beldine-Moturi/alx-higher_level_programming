@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """Defines Test cases for the class Rectangle"""
 import io
+import sys
 from contextlib import redirect_stdout
 import unittest
 from models.rectangle import Rectangle
@@ -146,11 +147,17 @@ class TestRectangleMethods(unittest.TestCase):
         by Rectangle methods that print to the standard output"""
 
         captured_output = io.StringIO()
-        with redirect_stdout(captured_output):
+        sys.stdout = captured_output
+        if method == "print":
+            print(rect)
+        else:
+            rect.display()
+        sys.stdout = sys.__stdout__
+        """with redirect_stdout(captured_output):
             if method == "print":
                 print(rect)
-            else:
-                rect.display()
+            elif method == "display":
+                rect.display()"""
         return (captured_output.getvalue())
 
     def test_display_method(self):
