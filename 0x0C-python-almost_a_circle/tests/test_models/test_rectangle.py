@@ -1,5 +1,7 @@
 #!/usr/bin/python3
 """Defines Test cases for the class Rectangle"""
+import io
+from contextlib import redirect_stdout
 import unittest
 from models.rectangle import Rectangle
 
@@ -137,3 +139,20 @@ class TestRectangleMethods(unittest.TestCase):
         self.assertEqual(Rectangle(10, 15).area(), 10 * 15)
         self.assertEqual(Rectangle(3, 4, 1, 1).area(), 3 * 4)
         self.assertEqual(Rectangle(4, 5, 1, 2, 12).area(), 4 * 5)
+
+    @staticmethod
+    def capture_stdout(rect):
+        """Captures what is printed to the standard output
+        by Rectangle methods that print to the standard output"""
+
+        self.captured_output = io.StringIO()
+        with redirect_stdout(self.captured_output):
+            rect.display()
+        return (self.captured_output.getvalue())
+
+    def test_display_method(self):
+        """Tests that the display method prints the correct Rectangle instance
+        representation to the standard output"""
+
+        self.r1 = Rectangle(3, 2, 0, 0)
+        self.assertEqual(self.r1.display(), '###\n###\n')
