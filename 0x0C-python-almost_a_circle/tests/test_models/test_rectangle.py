@@ -171,10 +171,10 @@ class TestRectangleMethods(unittest.TestCase):
         r4 = Rectangle(3, 4, 1, 1, 12)
 
         self.assertEqual(TestRectangleMethods.capture_stdout(r1, "print"),
-                         "[Rectangle] (r1.id) 0/0 - 4/5")
+                         f"[Rectangle] ({r1.id}) 0/0 - 4/5\n")
         self.assertEqual(TestRectangleMethods.capture_stdout(r2, "print"),
-                         "[Rectangle] (r2.id) 1/0 - 3/4")
+                         f"[Rectangle] ({r2.id}) 1/0 - 3/4\n")
         self.assertEqual(TestRectangleMethods.capture_stdout(r3, "print"),
-                         "[Rectangle] (r3.id) 1/2 - 5/6")
+                         f"[Rectangle] ({r3.id}) 1/2 - 5/6\n")
         self.assertEqual(TestRectangleMethods.capture_stdout(r4, "print"),
-                         "[Rectangle] (12) 1/1 - 3/4")
+                         f"[Rectangle] (12) 1/1 - 3/4\n")

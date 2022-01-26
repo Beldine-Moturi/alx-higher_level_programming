@@ -90,3 +90,9 @@ class Rectangle(Base):
             for n in range(self.__width):
                 print("#", end='')
             print()
+
+    def __str__(self):
+        """returns a description for the Rectangle instances"""
+
+        return f"[{self.__class__.__name__}] ({self.id}) {self.__x}/{self.__y} \
+- {self.__width}/{self.__height}"
