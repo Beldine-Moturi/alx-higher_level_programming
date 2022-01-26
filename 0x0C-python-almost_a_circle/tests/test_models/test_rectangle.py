@@ -145,14 +145,15 @@ class TestRectangleMethods(unittest.TestCase):
         """Captures what is printed to the standard output
         by Rectangle methods that print to the standard output"""
 
-        self.captured_output = io.StringIO()
-        with redirect_stdout(self.captured_output):
+        captured_output = io.StringIO()
+        with redirect_stdout(captured_output):
             rect.display()
-        return (self.captured_output.getvalue())
+        return (captured_output.getvalue())
 
     def test_display_method(self):
         """Tests that the display method prints the correct Rectangle instance
         representation to the standard output"""
 
         self.r1 = Rectangle(3, 2, 0, 0)
-        self.assertEqual(self.r1.display(), '###\n###\n')
+        self.assertEqual(TestRectangleMethods.capture_stdout(self.r1),
+                         '###\n###\n')
