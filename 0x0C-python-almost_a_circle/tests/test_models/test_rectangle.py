@@ -82,7 +82,7 @@ class TestRectangleInstantiation(unittest.TestCase):
         self.assertEqual(self.Rect6.y, 9)
 
 class TestAttributeValues(unittest.TestCase):
-    """Tests that the correct values are assigned for Rectangle
+    """Tests that the correct values are provided for Rectangle
     instance attributes, and that appropriate exceptions are
     raised otherwise"""
 
@@ -125,3 +125,15 @@ class TestAttributeValues(unittest.TestCase):
             Rectangle(10, 12, 3, "4")
         with self.assertRaisesRegex(ValueError, 'y must be >= 0'):
             Rectangle(12, 15, 3, -4)
+
+class TestRectangleMethods(unittest.TestCase):
+    """Tests whether all the methods in the Rectangle class produce
+    the correct expected output when called"""
+
+    def test_area_method(self):
+        """Tests whether the area method properly calculates
+        the area of the rectangle"""
+
+        self.assertEqual(Rectangle(10, 15).area(), 10 * 15)
+        self.assertEqual(Rectangle(3, 4, 1, 1).area(), 3 * 4)
+        self.assertEqual(Rectangle(4, 5, 1, 2, 12).area(), 4 * 5)
