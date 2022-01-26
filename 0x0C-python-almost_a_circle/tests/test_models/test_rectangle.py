@@ -157,7 +157,7 @@ class TestRectangleMethods(unittest.TestCase):
         """Tests that the display method prints the correct Rectangle instance
         representation to the standard output"""
 
-        self.r1 = Rectangle(3, 2, 0, 0)
+        self.r1 = Rectangle(3, 2)
         self.assertEqual(TestRectangleMethods.capture_stdout(self.r1, "display")
                          , '###\n###\n')
 
