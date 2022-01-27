@@ -199,6 +199,6 @@ class TestRectangleMethods(unittest.TestCase):
         self.assertEqual([r1.id, r1.width, r1.height], [89, 5, 6])
         r1.update(89, 5, 6, 2)
         self.assertEqual([r1.id, r1.width, r1.height, r1.x], [89, 5, 6, 2])
-        r1.upate(89, 5, 6, 2, 3)
+        r1.update(89, 5, 6, 2, 3)
         self.assertEqual([r1.id, r1.width, r1.height, r1.x, r1.y],
                          [89, 5, 6, 2, 3])
