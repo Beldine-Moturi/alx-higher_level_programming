@@ -141,36 +141,35 @@ class TestRectangleMethods(unittest.TestCase):
         self.assertEqual(Rectangle(3, 4, 1, 1).area(), 3 * 4)
         self.assertEqual(Rectangle(4, 5, 1, 2, 12).area(), 4 * 5)
 
-    @staticmethod
+    """@staticmethod
     def capture_stdout(rect, method):
-        """Captures what is printed to the standard output
-        by Rectangle methods that print to the standard output"""
+        Captures what is printed to the standard output
+        by Rectangle methods that print to the standard output
 
         captured_output = io.StringIO()
-        sys.stdout = captured_output
-        if method == "print":
-            print(rect)
-        else:
-            rect.display()
-        sys.stdout = sys.__stdout__
-        """with redirect_stdout(captured_output):
+        with redirect_stdout(captured_output):
             if method == "print":
                 print(rect)
             elif method == "display":
-                rect.display()"""
-        return (captured_output.getvalue())
+                rect.display()
+        return (captured_output.getvalue())"""
 
     def test_display_method(self):
         """Tests that the display method prints the correct Rectangle instance
         representation to the standard output"""
 
-        self.r1 = Rectangle(3, 2)
-        self.assertEqual(TestRectangleMethods.capture_stdout(self.r1, "display")
-                         , '###\n###\n')
+        r1 = Rectangle(3, 2)
+        captured_output = io.StringIO()
+        sys.stdout = captured_output
+        r1.display()
+        self.assertEqual(captured_output.getvalue(), '###\n###\n')
+        sys.stdout = sys.__stdout__
+        #self.assertEqual(TestRectangleMethods.capture_stdout(self.r1, "display")
+        #                 , '###\n###\n')
 
-    def test_str_method(self):
-        """Tests that the __str__ methods prints the expected representation
-        of the Rectangle instance"""
+    """def test_str_method(self):
+        Tests that the __str__ methods prints the expected representation
+        of the Rectangle instance
 
         r1 = Rectangle(4, 5)
         r2 = Rectangle(3, 4, 1)
@@ -185,3 +184,4 @@ class TestRectangleMethods(unittest.TestCase):
                          f"[Rectangle] ({r3.id}) 1/2 - 5/6\n")
         self.assertEqual(TestRectangleMethods.capture_stdout(r4, "print"),
                          f"[Rectangle] (12) 1/1 - 3/4\n")
+"""
