@@ -118,6 +118,7 @@ class Rectangle(Base):
                     self.x = value
                 elif key == 'y':
                     self.y = value
+
     def display(self):
         """Prints a Rectangle instance to stdout with the character #"""
 
@@ -130,5 +131,5 @@ class Rectangle(Base):
     def __str__(self):
         """returns a description for the Rectangle instances"""
 
-        return f"[{self.__class__.__name__}] ({self.id}) {self.__x}/{self.__y} \
-- {self.__width}/{self.__height}"
+        return f"[{self.__class__.__name__}] ({self.id}) {self.__x}/{self.__y}\
+ - {self.__width}/{self.__height}"
