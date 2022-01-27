@@ -50,7 +50,8 @@ class Square:
         self.__position = value
 
     def my_print(self):
-        """prints the squarw instance to stdout"""
+        """prints the square instance to stdout
+        Uses the position attribute to determine where to print the square"""
         if self.__size == 0:
             print()
             return
