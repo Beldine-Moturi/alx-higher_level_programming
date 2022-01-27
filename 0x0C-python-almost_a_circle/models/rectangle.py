@@ -83,6 +83,12 @@ class Rectangle(Base):
 
         return (self.__width * self.__height)
 
+    def update(self, *args):
+        """Assigns an argumetn in args to each attrinute of the
+        Rectangle instance"""
+
+        pass
+
     def display(self):
         """Prints a Rectangle instance to stdout with the character #"""
 

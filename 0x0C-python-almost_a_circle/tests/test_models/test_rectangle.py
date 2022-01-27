@@ -185,3 +185,20 @@ class TestRectangleMethods(unittest.TestCase):
                          f"[Rectangle] ({r3.id}) 1/2 - 5/6\n")
         self.assertEqual(TestRectangleMethods.capture_stdout(r4, "print"),
                          f"[Rectangle] (12) 1/1 - 3/4\n")
+
+    def test_update_method(self):
+        """Tests that the update method properly assigns an argument to
+        each attribute of the Rectangle class"""
+
+        r1 = Rectangle(10, 10, 10, 10, 10)
+        r1.update(89)
+        self.assertEqual(r1.id, 89)
+        r1.update(89, 5)
+        self.assertEqual([r1.id, r1.width], [89, 5])
+        r1.update(89, 5, 6)
+        self.assertEqual([r1.id, r1.width, r1.height], [89, 5, 6])
+        r1.update(89, 5, 6, 2)
+        self.assertEqual([r1.id, r1.width, r1.height, r1.x], [89, 5, 6, 2])
+        r1.upate(89, 5, 6, 2, 3)
+        self.assertEqual([r1.id, r1.width, r1.height, r1.x, r1.y],
+                         [89, 5, 6, 2, 3])
