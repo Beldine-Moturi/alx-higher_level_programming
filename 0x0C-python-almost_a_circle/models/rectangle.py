@@ -83,28 +83,41 @@ class Rectangle(Base):
 
         return (self.__width * self.__height)
 
-    def update(self, *args):
+    def update(self, *args, **kwargs):
         """Assigns an argumetn in args to each attrinute of the
         Rectangle instance"""
 
-        length = len(args)
-        if length == 0:
-            return
-        for i in range(length):
-            if i == 0:
-                if args[i] is None:
-                    self.__init__(self.width, self.height, self.x, self.y)
-                else:
-                    self.id = args[i]
-            elif i == 1:
-                self.width = args[i]
-            elif i == 2:
-                self.height = args[i]
-            elif i == 3:
-                self.x = args[i]
-            elif i == 4:
-                self.y = args[i]
+        if args and len(args) != 0:
+            for i in range(len(args)):
+                if i == 0:
+                    if args[i] is None:
+                        self.__init__(self.width, self.height, self.x, self.y)
+                    else:
+                        self.id = args[i]
+                elif i == 1:
+                    self.width = args[i]
+                elif i == 2:
+                    self.height = args[i]
+                elif i == 3:
+                    self.x = args[i]
+                elif i == 4:
+                    self.y = args[i]
 
+        elif kwargs and len(kwargs) != 0:
+            for key, value in kwargs.items():
+                if key == 'id':
+                    if value is None:
+                        self.__init__(self.width, self.height, self.x, self.y)
+                    else:
+                        self.id = value
+                elif key == 'width':
+                    self.width = value
+                elif key == 'height':
+                    self.height = value
+                elif key == 'x':
+                    self.x = value
+                elif key == 'y':
+                    self.y = value
     def display(self):
         """Prints a Rectangle instance to stdout with the character #"""
 

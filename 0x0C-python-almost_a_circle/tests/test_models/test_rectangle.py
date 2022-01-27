@@ -215,7 +215,7 @@ class TestRectangleMethods(unittest.TestCase):
         r1.update(x=2, y=3)
         self.assertListEqual([r1.x, r1.y], [2, 3])
         r1.update(width=4, y=1, height=5, x=1)
-        self.assertListEqual([r1.width, r1.height, r1.x, r1.y], [4, 5, 1, 2])
-        r1.upate(x=0, height=8, width=9, id=12, y=0)
+        self.assertListEqual([r1.width, r1.height, r1.x, r1.y], [4, 5, 1, 1])
+        r1.update(x=0, height=8, width=9, id=12, y=0)
         self.assertListEqual([r1.id, r1.width, r1.height, r1.x, r1.y],
                              [12, 9, 8, 0, 0])
