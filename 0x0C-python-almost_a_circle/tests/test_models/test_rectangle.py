@@ -186,19 +186,36 @@ class TestRectangleMethods(unittest.TestCase):
         self.assertEqual(TestRectangleMethods.capture_stdout(r4, "print"),
                          f"[Rectangle] (12) 1/1 - 3/4\n")
 
-    def test_update_method(self):
-        """Tests that the update method properly assigns an argument to
-        each attribute of the Rectangle class"""
+    def test_update_args_method(self):
+        """Tests that the update method properly assigns arguments to
+        each attribute of the Rectangle class, when called using *args"""
 
         r1 = Rectangle(10, 10, 10, 10, 10)
         r1.update(89)
         self.assertEqual(r1.id, 89)
         r1.update(89, 5)
-        self.assertEqual([r1.id, r1.width], [89, 5])
+        self.assertListEqual([r1.id, r1.width], [89, 5])
         r1.update(89, 5, 6)
-        self.assertEqual([r1.id, r1.width, r1.height], [89, 5, 6])
+        self.assertListEqual([r1.id, r1.width, r1.height], [89, 5, 6])
         r1.update(89, 5, 6, 2)
-        self.assertEqual([r1.id, r1.width, r1.height, r1.x], [89, 5, 6, 2])
+        self.assertListEqual([r1.id, r1.width, r1.height, r1.x], [89, 5, 6, 2])
         r1.update(89, 5, 6, 2, 3)
-        self.assertEqual([r1.id, r1.width, r1.height, r1.x, r1.y],
+        self.assertListEqual([r1.id, r1.width, r1.height, r1.x, r1.y],
                          [89, 5, 6, 2, 3])
+
+    def test_update_kwargs_method(self):
+        """Tests that the update method properly assgins arguments to each
+        attribute of the Rectangle class when called using *kwargs"""
+
+        r1 = Rectangle(10, 10, 10, 10, 10)
+        r1.update(width=15)
+        self.assertEqual(r1.width, 15)
+        r1.update(height=20)
+        self.assertEqual(r1.height, 20)
+        r1.update(x=2, y=3)
+        self.assertListEqual([r1.x, r1.y], [2, 3])
+        r1.update(width=4, y=1, height=5, x=1)
+        self.assertListEqual([r1.width, r1.height, r1.x, r1.y], [4, 5, 1, 2])
+        r1.upate(x=0, height=8, width=9, id=12, y=0)
+        self.assertListEqual([r1.id, r1.width, r1.height, r1.x, r1.y],
+                             [12, 9, 8, 0, 0])
