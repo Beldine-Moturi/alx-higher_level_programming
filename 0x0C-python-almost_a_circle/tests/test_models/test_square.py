@@ -61,6 +61,39 @@ class TestSquareInstantiation(unittest.TestCase):
         self.assertEqual(s1.y, 4)
         self.assertEqual(s1.id, 43)
 
+class TestSquareAttributes(unittest.TestCase):
+    """Tests that the attributtes of Square insatnces are assigned
+    proper values and appropriate exceptions are raised otherwise"""
+
+    def test_width_attribute(self):
+        """Tests that the appropriate exceptions are raised if the width
+        attribute is not an integer or is not greater than 0"""
+
+        with self.assertRaisesRegex(TypeError, 'width must be an integer'):
+            Square("10", 3, 4)
+        with self.assertRaisesRegex(ValueError, 'width must be > 0'):
+            Square(-5, 1, 2)
+        with self.assertRaisesRegex(ValueError, 'width must be > 0'):
+            Square(0, 3, 4)
+
+    def test_x_attribute(self):
+        """Tests whether appropriate exceptions are raised if the x value
+        is not an integer or is less than 0"""
+
+        with self.assertRaisesRegex(TypeError, 'x must be an integer'):
+            Square(10, "3", 4)
+        with self.assertRaisesRegex(ValueError, 'x must be >= 0'):
+            Square(10, -3, 4)
+
+    def test_y_attribute(self):
+        """Tests whether the appropriate exceptions are raised if the y value
+        is not an integer or is less than 0"""
+
+        with self.assertRaisesRegex(TypeError, 'y must be an integer'):
+            Square(10, 3, "4")
+        with self.assertRaisesRegex(ValueError, 'y must be >= 0'):
+            Square(12, 3, -4)
+
 class TestSquareMethods(unittest.TestCase):
     """Tests that the methods of the Square class work as they are
     expected to"""
