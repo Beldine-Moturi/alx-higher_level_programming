@@ -86,6 +86,8 @@ class TestBaseMethods(unittest.TestCase):
             Base.to_json_string(["string_a", "string_b"])
         with self.assertRaises(TypeError):
             Base.to_json_string([4, 5])
+        with self.assertRaises(TypeError):
+            Base.to_json_string([{'width': 4, 'height': 5}, "string", 45])
 
 if __name__ == "__main__":
     unittest.main()
