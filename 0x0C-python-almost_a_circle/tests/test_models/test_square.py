@@ -152,6 +152,38 @@ class TestSquareMethods(unittest.TestCase):
         self.assertListEqual([s1.id, s1.size, s1.x, s1.y],
                              [12, 23, 0, 0])
 
+    def test_to_dictionary_method(self):
+        """Tests that the to_dictionary method returns the expected
+        representation of a Square instance"""
+        s1 = Square(5)
+        s2 = Square(5, 2)
+        s3 = Square(5, 2, 3)
+        s4 = Square(5, 2, 3, 12)
+        self.assertTrue(type(s1.to_dictionary()), dict)
+        self.assertDictEqual(s1.to_dictionary(), {
+            'size': 5,
+            'x': 0,
+            'y': 0,
+            'id': s1.id
+        })
+        self.assertDictEqual(s2.to_dictionary(), {
+            'size': 5,
+            'x': 2,
+            'y': 0,
+            'id': s2.id
+        })
+        self.assertDictEqual(s3.to_dictionary(), {
+            'size': 5,
+            'x': 2,
+            'y': 3,
+            'id': s3.id
+        })
+        self.assertDictEqual(s4.to_dictionary(), {
+            'size': 5,
+            'x': 2,
+            'y': 3,
+            'id': 12
+        })
 
 
 if __name__ == "__main__":
