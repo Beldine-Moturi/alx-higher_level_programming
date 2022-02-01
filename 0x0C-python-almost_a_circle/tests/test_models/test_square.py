@@ -75,6 +75,7 @@ class TestSquareAttributes(unittest.TestCase):
             Square(-5)
         with self.assertRaisesRegex(ValueError, 'width must be > 0'):
             Square(0)
+
     def test_width_attribute(self):
         """Tests that the appropriate exceptions are raised if the width
         attribute is not an integer or is not greater than 0"""
@@ -121,3 +122,37 @@ class TestSquareMethods(unittest.TestCase):
         self.assertEqual(s2.__str__(), f"[Square] ({s2.id}) 1/0 - 4")
         self.assertEqual(s3.__str__(), f"[Square] ({s3.id}) 2/3 - 6")
         self.assertEqual(s4.__str__(), "[Square] (12) 3/4 - 7")
+
+    def test_update_args_method(self):
+        """Tests that the update method properly assigns arguments to
+        each attribute of the Rectangle class, when called using *args"""
+
+        s1 = Square(5, 1, 2)
+        s1.update(24)
+        self.assertEqual(s1.id, 24)
+        s1.update(24, 8)
+        self.assertListEqual([s1.id, s1.size], [24, 8])
+        s1.update(24, 8, 9)
+        self.assertListEqual([s1.id, s1.size, s1.x], [24, 8, 9])
+        s1.update(24, 8, 9, 10)
+        self.assertListEqual([s1.id, s1.size, s1.x, s1.y], [24, 8, 9, 10])
+
+    def test_update_kwargs_method(self):
+        """Tests that the update method properly assgins arguments to each
+        attribute of the Rectangle class when called using *kwargs"""
+
+        s1 = Square(10, 10, 10, 10)
+        s1.update(size=15)
+        self.assertEqual(s1.size, 15)
+        s1.update(x=2, y=3)
+        self.assertListEqual([s1.x, s1.y], [2, 3])
+        s1.update(size=4, y=1, x=1)
+        self.assertListEqual([s1.size, s1.x, s1.y], [4, 1, 1])
+        s1.update(x=0, id=12, size=23, y=0)
+        self.assertListEqual([s1.id, s1.size, s1.x, s1.y],
+                             [12, 23, 0, 0])
+
+
+
+if __name__ == "__main__":
+    unittest.main()
