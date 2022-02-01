@@ -65,6 +65,16 @@ class TestSquareAttributes(unittest.TestCase):
     """Tests that the attributtes of Square insatnces are assigned
     proper values and appropriate exceptions are raised otherwise"""
 
+    def test_size_attribute(self):
+        """Tests that the appropriate exceptions are raised if the size
+        attribute is not an integer and is not greater than 0"""
+
+        with self.assertRaisesRegex(TypeError, 'width must be an integer'):
+            Square("5")
+        with self.assertRaisesRegex(ValueError, 'width must be > 0'):
+            Square(-5)
+        with self.assertRaisesRegex(ValueError, 'width must be > 0'):
+            Square(0)
     def test_width_attribute(self):
         """Tests that the appropriate exceptions are raised if the width
         attribute is not an integer or is not greater than 0"""
