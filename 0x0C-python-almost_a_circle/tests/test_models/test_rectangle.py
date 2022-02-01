@@ -219,3 +219,40 @@ class TestRectangleMethods(unittest.TestCase):
         r1.update(x=0, height=8, width=9, id=12, y=0)
         self.assertListEqual([r1.id, r1.width, r1.height, r1.x, r1.y],
                              [12, 9, 8, 0, 0])
+
+    def test_to_dictionary_method(self):
+        """Tests that the to_dictionary method return the expected
+        dictionary representation of a Rectangle instance"""
+
+        r1 = Rectangle(4, 5, 2, 3, 12)
+        r2 = Rectangle(4, 5)
+        r3 = Rectangle(4, 5, 2)
+        r4 = Rectangle(4, 5, 2, 3)
+        self.assertDictEqual(r1.to_dictionary(), {
+            'x': 2,
+            'y': 3,
+            'id': 12,
+            'height': 5,
+            'width': 4
+        })
+        self.assertDictEqual(r2.to_dictionary(), {
+            'x': 0,
+            'y': 0,
+            'id': r2.id,
+            'height': 5,
+            'width': 4
+        })
+        self.assertDictEqual(r3.to_dictionary(), {
+            'width': 4,
+            'height': 5,
+            'x': 2,
+            'y': 0,
+            'id': r3.id
+        })
+        self.assertDictEqual(r4.to_dictionary(), {
+            'x': 2,
+            'y': 3,
+            'id': r4.id,
+            'width': 4,
+            'height': 5
+        })
