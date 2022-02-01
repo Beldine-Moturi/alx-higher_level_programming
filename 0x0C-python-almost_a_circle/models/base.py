@@ -37,6 +37,7 @@ class Base:
             if type(item) != dict:
                 raise TypeError
         return json.dumps(list_dictionaries)
+<<<<<<< HEAD
 
     @classmethod
     def save_to_file(cls, list_objs):
@@ -49,3 +50,5 @@ class Base:
         my_json_string = Base.to_json_string(new_list)
         with open(f"{cls.__name__}.json", mode='w') as f:
             f.write(my_json_string)
+=======
+>>>>>>> 0f9eaf9cd9e236ffbf3f1e9d7dde106d95d0a5f9
