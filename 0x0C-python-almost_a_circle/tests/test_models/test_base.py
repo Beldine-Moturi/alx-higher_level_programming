@@ -2,8 +2,9 @@
 """
 Contains unittests for the Base class methods
 """
-import unittest
+import json
 from models.base import Base
+import unittest
 
 
 class TestBaseInstantiation(unittest.TestCase):
@@ -55,6 +56,36 @@ class TestBaseInstantiation(unittest.TestCase):
 
         with self.assertRaises(TypeError):
             Base(1, 2)
+
+class TestBaseMethods(unittest.TestCase):
+    """Tests that all the methods in the Base class work as expected"""
+
+    def test_to_json_string_method(self):
+        """Tests that the to_json_string method  returns the JSON string
+        representation of list_dictionaries"""
+
+        list1 = None
+        list2 = []
+        list3 = [{'x': 2, 'y': 3, 'width': 4, 'height': 5, 'id': 12}]
+        list4 = [{'x': 1, 'y': 2, 'width': 5, 'height': 6},
+                 {'x': 2, 'y': 3, 'width': 7, 'height': 8, 'id': 23}]
+        self.assertEqual(Base.to_json_string(list1), "[]")
+        self.assertEqual(Base.to_json_string(list2), "[]")
+        self.assertEqual(Base.to_json_string(list3), json.dumps(list3))
+        self.assertEqual(Base.to_json_string(list4), json.dumps(list4))
+
+    def test_to_json_string_exceptions(self):
+        """Tests that the to_json_string method raises the right exceptions
+        is the argument passed to it is not a list of dictionaries"""
+
+        with self.assertRaises(TypeError):
+            Base.to_json_string("a string")
+        with self.assertRaises(TypeError):
+            Base.to_json_string(5)
+        with self.assertRaises(TypeError):
+            Base.to_json_string(["string_a", "string_b"])
+        with self.assertRaises(TypeError):
+            Base.to_json_string([4, 5])
 
 if __name__ == "__main__":
     unittest.main()
