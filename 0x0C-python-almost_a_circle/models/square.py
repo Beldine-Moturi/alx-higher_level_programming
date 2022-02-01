@@ -34,3 +34,35 @@ class Square(Rectangle):
 
         return f"[{self.__class__.__name__}] ({self.id}) {self.x}/{self.y}\
  - {self.width}"
+
+    def update(self, *args, **kwargs):
+        """Assigns an argument in args or kwargs to each attribute of the
+        Square instance"""
+
+        if args and len(args) != 0:
+            for i in range(len(args)):
+                if i == 0:
+                    if args[i] is None:
+                        self.__init__(self.size, self.x, self.y)
+                    else:
+                        self.id = args[i]
+                elif i == 1:
+                    self.size = args[i]
+                elif i == 2:
+                    self.x = args[i]
+                elif i == 3:
+                    self.y = args[i]
+
+        elif kwargs and len(kwargs) != 0:
+            for key, value in kwargs.items():
+                if key == 'id':
+                    if value is None:
+                        self.__init__(self.size, self.x, self.y)
+                    else:
+                        self.id = value
+                elif key == 'size':
+                    self.size = value
+                elif key == 'x':
+                    self.x = value
+                elif key == 'y':
+                    self.y = value
