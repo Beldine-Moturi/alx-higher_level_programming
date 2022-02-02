@@ -4,6 +4,8 @@ Contains unittests for the Base class methods
 """
 import json
 from models.base import Base
+from models.rectangle import Rectangle
+from models.square import Square
 import os
 import unittest
 
