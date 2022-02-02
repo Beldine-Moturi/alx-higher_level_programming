@@ -148,6 +148,70 @@ class TestBaseMethods(unittest.TestCase):
                 l4.to_dictionary()
             ]))
 
+    def test_Rectangle_create_method(self):
+        """Tests that the create method properly creates new Rectangle
+    instances from the arguments supplied"""
+
+        r3 = {'id': 23, 'width': 4, 'height': 5}
+        r4 = {'id': 34, 'width': 6, 'height': 7, 'x': 1}
+        r5 = {'id': 32, 'width': 8, 'height': 9, 'x': 2, 'y': 3}
+
+        new_r3 = Rectangle.create(**r3)
+        self.assertEqual(str(new_r3), "[Rectangle] (23) 0/0 - 4/5")
+
+        new_r4 = Rectangle.create(**r4)
+        self.assertEqual(str(new_r4), "[Rectangle] (34) 1/0 - 6/7")
+
+        new_r5 = Rectangle.create(**r5)
+        self.assertEqual(str(new_r5), "[Rectangle] (32) 2/3 - 8/9")
+
+    def test_rectangle_create_exceptions(self):
+        """Tests that the create method raises the appropriate exceptions when
+        called with an insufficient dictionary"""
+
+        r1 = {'id': 12}
+        r2 = {'id': 24, 'width': 5}
+        r3 = {'id': 25, 'height': 6}
+
+        with self.assertRaises(TypeError):
+            new_r1 = Rectangle.create(**r1)
+
+        with self.assertRaises(TypeError):
+            Rectangle.create(**r2)
+
+        with self.assertRaises(TypeError):
+            Rectangle.create(**r3)
+
+    def test_square_create_method(self):
+        """Tests that the create method properly creates new Square instances
+         from the arguments supplied"""
+
+        s1 = {'id': 10, 'size': 5}
+        s2 = {'id': 12, 'size': 6, 'x': 2}
+        s3 = {'id': 24, 'size': 8, 'x': 3, 'y': 4}
+
+        new_s1 = Square.create(**s1)
+        self.assertEqual(str(new_s1), "[Square] (10) 0/0 - 5")
+
+        new_s2 = Square.create(**s2)
+        self.assertEqual(str(new_s2), "[Square] (12) 2/0 - 6")
+
+        new_s3 = Square.create(**s3)
+        self.assertEqual(str(new_s3), "[Square] (24) 3/4 - 8")
+
+    def test_square_create_exceptions(self):
+        """Tests that appropriate exceptions are raised if the
+        create method is called with an insufficient dictionary"""
+
+        s1 = {'id': 5}
+        s2 = {'id': 24, 'x': 4, 'y': 5}
+
+        with self.assertRaises(TypeError):
+            Square.create(**s1)
+
+        with self.assertRaises(TypeError):
+            Square.create(**s2)
+
 
 if __name__ == "__main__":
     unittest.main()

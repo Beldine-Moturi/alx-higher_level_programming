@@ -64,8 +64,15 @@ class Base:
 
         if dictionary and dictionary != {}:
             if cls.__name__ == "Rectangle":
-                new_instance = cls(1, 2)
-            else:
-                new_instance = cls(1)
+                if ("width" not in dictionary.keys()) or\
+                   ("height" not in dictionary.keys()):
+                    raise TypeError
+                else:
+                    new_instance = cls(1, 2)
+            elif cls.__name__ == "Square":
+                if ("size" not in dictionary.keys()):
+                    raise TypeError
+                else:
+                    new_instance = cls(1)
             new_instance.update(**dictionary)
             return new_instance
