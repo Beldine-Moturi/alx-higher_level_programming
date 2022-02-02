@@ -57,3 +57,15 @@ class Base:
         my_json_string = Base.to_json_string(new_list)
         with open(f"{cls.__name__}.json", mode='w') as f:
             f.write(my_json_string)
+
+    @classmethod
+    def create(cls, **dictionary):
+        """ returns an instance with all attributes already set"""
+
+        if dictionary and dictionary != {}:
+            if cls.__name__ == "Rectangle":
+                new_instance = cls(1, 2)
+            else:
+                new_instance = cls(1)
+            new_instance.update(**dictionary)
+            return new_instance
