@@ -122,6 +122,14 @@ class TestBaseMethods(unittest.TestCase):
             os.remove("Base.json")
         except IOError:
             pass
+        try:
+            os.remove("Rectangle.json")
+        except IOError:
+            pass
+        try:
+            os.remove("Square.json")
+        except IOError:
+            pass
 
     def test_save_to_file_method(self):
         """Tests that the save_to_file method writes the JSON string
@@ -147,6 +155,14 @@ class TestBaseMethods(unittest.TestCase):
                 l3.to_dictionary(),
                 l4.to_dictionary()
             ]))
+
+        Rectangle.save_to_file([])
+        with open("Rectangle.json", "r") as f:
+            self.assertEqual(f.read(), "[]")
+
+        Square.save_to_file([])
+        with open("Square.json", "r") as f:
+            self.assertEqual(f.read(), "[]")
 
     def test_Rectangle_create_method(self):
         """Tests that the create method properly creates new Rectangle
