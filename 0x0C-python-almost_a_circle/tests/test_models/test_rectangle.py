@@ -272,14 +272,13 @@ class TestRectangleMethods(unittest.TestCase):
         representation of list_objs to a file"""
 
         r1 = None
-        r2 = []
         r3 = Rectangle(4, 5, 1, 2, 12)
 
         Rectangle.save_to_file(r1)
         with open("Rectangle.json") as f:
             self.assertEqual(f.read(), "[]")
 
-        Rectangle.save_to_file(r2)
+        Rectangle.save_to_file([])
         with open("Rectangle.json") as f:
             self.assertEqual(f.read(), "[]")
 

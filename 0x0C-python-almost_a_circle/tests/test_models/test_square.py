@@ -200,14 +200,13 @@ class TestSquareMethods(unittest.TestCase):
            representation of list_objs to a file"""
 
         s1 = None
-        s2 = []
         s3 = Square(5, 1, 2, 12)
 
         Square.save_to_file(s1)
         with open("Square.json") as f:
             self.assertEqual(f.read(), "[]")
 
-        Square.save_to_file(s2)
+        Square.save_to_file([])
         with open("Square.json") as f:
             self.assertEqual(f.read(), "[]")
 
