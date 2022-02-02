@@ -164,6 +164,46 @@ class TestBaseMethods(unittest.TestCase):
         with open("Square.json", "r") as f:
             self.assertEqual(f.read(), "[]")
 
+    def test_rectangle_load_from_file_method(self):
+        """Tests that the load_from file method successfully
+        returns a list of instances of a rectangle"""
+
+        l1 = None
+        l2 = []
+        l3 = Rectangle(4, 5, 1, 2)
+
+        Rectangle.save_to_file(l1)
+        list1 = Rectangle.load_from_file()
+        self.assertEqual(list1, [])
+
+        Rectangle.save_to_file(l2)
+        list2 = Rectangle.load_from_file()
+        self.assertEqual(list2, [])
+
+        Rectangle.save_to_file([l3])
+        list3 = Rectangle.load_from_file()
+        self.assertEqual(str(list3[0]), str(l3))
+
+    def test_square_load_from_file_method(self):
+        """Tests that the load_from_file method successfully
+        returns a list of instances of a Square"""
+
+        s1 = None
+        s2 = []
+        s3 = Square(5, 1, 2)
+
+        Square.save_to_file(s1)
+        list1 = Square.load_from_file()
+        self.assertEqual(list1, [])
+
+        Square.save_to_file(s2)
+        list2 = Square.load_from_file()
+        self.assertEqual(list2, [])
+
+        Square.save_to_file([s3])
+        list3 = Square.load_from_file()
+        self.assertEqual(str(list3[0]), str(s3))
+
     def test_Rectangle_create_method(self):
         """Tests that the create method properly creates new Rectangle
     instances from the arguments supplied"""

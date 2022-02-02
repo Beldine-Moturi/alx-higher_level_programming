@@ -38,14 +38,6 @@ class Base:
                 raise TypeError
         return json.dumps(list_dictionaries)
 
-    def from_json_string(json_string):
-        """ returns the list of the JSON string representation json_string:
-        json_string is a string representing a list of dictionaries"""
-
-        if json_string is None:
-            return []
-        return json.loads(json_string)
-
     @classmethod
     def save_to_file(cls, list_objs):
         """writes the JSON string representation of list_objs to a file:"""
@@ -58,23 +50,17 @@ class Base:
         with open(f"{cls.__name__}.json", mode='w') as f:
             f.write(my_json_string)
 
-    @classmethod
-    def load_from_file(cls):
-        """returns a list of instances"""
+    def from_json_string(json_string):
+        """ returns the list of the JSON string representation json_string:
+        json_string is a string representing a list of dictionaries"""
 
-        try:
-            f = open(f"{cls.__name__}.json", 'r')
-            my_list = Base.from_json_string(f.read())
-            new_list = []
-            for item in my_list:
-                new_list.append(cls.create(**item))
-            return new_list
-        except FileNotFoundError:
+        if json_string is None:
             return []
+        return json.loads(json_string)
 
     @classmethod
     def create(cls, **dictionary):
-        """ returns an instance with all attributes already set"""
+        """returns an instance with all attributes already set"""
 
         if dictionary and dictionary != {}:
             if cls.__name__ == "Rectangle":
@@ -84,9 +70,22 @@ class Base:
                 else:
                     new_instance = cls(1, 2)
             elif cls.__name__ == "Square":
-                if ("size" not in dictionary.keys()):
+                if ("size" not in dictionary.keys() and\
+                    ('width' not in dictionary.keys()) and\
+                    ('height' not in dictionary.keys())):
                     raise TypeError
                 else:
                     new_instance = cls(1)
             new_instance.update(**dictionary)
             return new_instance
+
+    @classmethod
+    def load_from_file(cls):
+        """returns a list of instances"""
+
+        try:
+            with open(f"{cls.__name__}.json", 'r') as f:
+                my_list = Base.from_json_string(f.read())
+                return [cls.create(**item) for item in my_list]
+        except FileNotFoundError:
+            return []
