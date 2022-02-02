@@ -4,6 +4,9 @@ Contains unittests for the Base class methods
 """
 import json
 from models.base import Base
+from models.rectangle import Rectangle
+from models.square import Square
+import os
 import unittest
 
 
@@ -88,6 +91,57 @@ class TestBaseMethods(unittest.TestCase):
             Base.to_json_string([4, 5])
         with self.assertRaises(TypeError):
             Base.to_json_string([{'width': 4, 'height': 5}, "string", 45])
+
+
+    def tearDown(self):
+        """Deletes resources(files) created when running tests"""
+
+        try:
+            os.remove("Rectangle.json")
+        except IOError:
+            pass
+        try:
+            os.remove("Square.json")
+        except IOError:
+            pass
+        try:
+            os.remove("Base.json")
+        except IOError:
+            pass
+
+    def test_save_to_file_method(self):
+        """Tests that the save_to_file method writes the JSON string
+        representation of list_objs to a file"""
+
+        l1 = None
+        l2 = []
+        l3 = Rectangle(4, 5, 1, 2)
+        l4 = Square(5, 1, 1)
+        l5 = [l3, l4]
+
+        Base.save_to_file(l1)
+        with open("Base.json")as f:
+            self.assertEqual(f.read(), "[]")
+
+        Base.save_to_file(l2)
+        with open("Base.json") as f:
+            self.assertEqual(f.read(), "[]")
+
+        Rectangle.save_to_file([l3])
+        with open("Rectangle.json") as f:
+            self.assertEqual(f.read(), json.dumps([l3.to_dictionary()]))
+
+        Square.save_to_file([l4])
+        with open("Square.json") as f:
+            self.assertEqual(f.read(), json.dumps([l4.to_dictionary()]))
+
+        Base.save_to_file(l5)
+        with open("Base.json") as f:
+            self.assertEqual(f.read(), json.dumps([
+                l3.to_dictionary(),
+                l4.to_dictionary()
+            ]))
+
 
 if __name__ == "__main__":
     unittest.main()
