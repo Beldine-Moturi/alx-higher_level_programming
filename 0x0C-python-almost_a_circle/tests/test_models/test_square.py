@@ -1,6 +1,8 @@
 #!/usr/bin/python3
 """Contains test cased for the Square class"""
 from models.square import Square
+import json
+import os
 import unittest
 
 
@@ -184,6 +186,34 @@ class TestSquareMethods(unittest.TestCase):
             'y': 3,
             'id': 12
         })
+
+    def tearDown(self):
+        """Deletes resources(files) created when tests are run"""
+
+        try:
+            os.remove("Square.json")
+        except IOError:
+            pass
+
+    def test_save_to_file_method(self):
+        """Tests that the save_to_file method writes the JSON string
+           representation of list_objs to a file"""
+
+        s1 = None
+        s2 = []
+        s3 = Square(5, 1, 2, 12)
+
+        Square.save_to_file(s1)
+        with open("Square.json") as f:
+            self.assertEqual(f.read(), "[]")
+
+        Square.save_to_file(s2)
+        with open("Square.json") as f:
+            self.assertEqual(f.read(), "[]")
+
+        Square.save_to_file([s3])
+        with open("Square.json") as f:
+            self.assertEqual(f.read(), json.dumps([s3.to_dictionary()]))
 
 
 if __name__ == "__main__":

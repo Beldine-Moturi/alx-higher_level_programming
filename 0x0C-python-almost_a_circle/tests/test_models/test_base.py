@@ -4,8 +4,6 @@ Contains unittests for the Base class methods
 """
 import json
 from models.base import Base
-from models.rectangle import Rectangle
-from models.square import Square
 import os
 import unittest
 
@@ -97,14 +95,6 @@ class TestBaseMethods(unittest.TestCase):
         """Deletes resources(files) created when running tests"""
 
         try:
-            os.remove("Rectangle.json")
-        except IOError:
-            pass
-        try:
-            os.remove("Square.json")
-        except IOError:
-            pass
-        try:
             os.remove("Base.json")
         except IOError:
             pass
@@ -126,14 +116,6 @@ class TestBaseMethods(unittest.TestCase):
         Base.save_to_file(l2)
         with open("Base.json") as f:
             self.assertEqual(f.read(), "[]")
-
-        Rectangle.save_to_file([l3])
-        with open("Rectangle.json") as f:
-            self.assertEqual(f.read(), json.dumps([l3.to_dictionary()]))
-
-        Square.save_to_file([l4])
-        with open("Square.json") as f:
-            self.assertEqual(f.read(), json.dumps([l4.to_dictionary()]))
 
         Base.save_to_file(l5)
         with open("Base.json") as f:

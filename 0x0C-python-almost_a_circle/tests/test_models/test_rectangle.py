@@ -3,8 +3,10 @@
 import io
 import sys
 from contextlib import redirect_stdout
-import unittest
+import json
 from models.rectangle import Rectangle
+import os
+import unittest
 
 
 class TestRectangleInstantiation(unittest.TestCase):
@@ -256,3 +258,35 @@ class TestRectangleMethods(unittest.TestCase):
             'width': 4,
             'height': 5
         })
+
+    def tearDown(self):
+        """Deletes resources(files) created when running tests"""
+
+        try:
+            os.remove("Rectangle.json")
+        except IOError:
+            pass
+
+    def test_save_to_file_method(self):
+        """Tests that the save_to_file method writes the JSON string
+        representation of list_objs to a file"""
+
+        r1 = None
+        r2 = []
+        r3 = Rectangle(4, 5, 1, 2, 12)
+
+        Rectangle.save_to_file(r1)
+        with open("Rectangle.json") as f:
+            self.assertEqual(f.read(), "[]")
+
+        Rectangle.save_to_file(r2)
+        with open("Rectangle.json") as f:
+            self.assertEqual(f.read(), "[]")
+
+        Rectangle.save_to_file([r3])
+        with open("Rectangle.json") as f:
+            self.assertEqual(f.read(), json.dumps([r3.to_dictionary()]))
+
+
+if __name__ == "__main__":
+    unittest.main()
