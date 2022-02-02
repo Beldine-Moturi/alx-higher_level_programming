@@ -92,6 +92,28 @@ class TestBaseMethods(unittest.TestCase):
         with self.assertRaises(TypeError):
             Base.to_json_string([{'width': 4, 'height': 5}, "string", 45])
 
+    def test_from_json_string_method(self):
+        """Tests that the from_json_string method returns the list of the JSON
+        string representation json_string"""
+
+        list1 = None
+        list2 = "[]"
+        list3 = [{'x': 2, 'y': 3, 'width': 4, 'height': 5, 'id': 12}]
+        list4 = [\
+            {'x': 1, 'y': 2, 'width': 5, 'height': 6},\
+            {'x': 2, 'y': 3, 'width': 7, 'height': 8, 'id': 23}\
+        ]
+        json_string3 = Base.to_json_string(list3)
+        json_string4 = Base.to_json_string(list4)
+
+        self.assertEqual(Base.from_json_string(list1), [])
+        self.assertEqual(Base.from_json_string(list2), [])
+        self.assertEqual(Base.from_json_string(json_string3),
+                         [{'x': 2, 'y': 3, 'width': 4, 'height': 5, 'id': 12}])
+        self.assertEqual(Base.from_json_string(json_string4),[
+            {'x': 1, 'y': 2, 'width': 5, 'height': 6},
+            {'x': 2, 'y': 3, 'width': 7, 'height': 8, 'id': 23}
+        ])
 
     def tearDown(self):
         """Deletes resources(files) created when running tests"""
