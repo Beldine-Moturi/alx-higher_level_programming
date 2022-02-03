@@ -72,9 +72,9 @@ class Base:
                     new_instance = cls(1, 2)
             elif cls.__name__ == "Square":
                 if (
-                        "size" not in dictionary.keys()
-                        and ('width' not in dictionary.keys())
-                        and ('height' not in dictionary.keys())):
+                        "size" not in dictionary.keys() and
+                        ('width' not in dictionary.keys()) and
+                        ('height' not in dictionary.keys())):
                     raise TypeError
                 else:
                     new_instance = cls(1)
@@ -114,15 +114,14 @@ class Base:
 
         try:
             with open(f"{cls.__name__}.csv", mode='r', newline='') as csvfile:
-                if csvfile.read() == "[]":
-                    return []
+                if cls.__name__ == "Rectangle":
+                    keys = ['id', 'width', 'height', 'x', 'y']
                 else:
-                    if cls.__name__ == "Rectangle":
-                        keys = ['id', 'width', 'height', 'x', 'y']
-                    else:
-                        keys = ['id', 'size', 'x', 'y']
-                    my_file = csv.DictReader(csvfile, fieldnames=keys)
-                    return [cls.create(**row) for row in my_file]
+                    keys = ['id', 'size', 'x', 'y']
+                my_file = csv.DictReader(csvfile, fieldnames=keys)
+                my_file = [dict([k, int(v)] for k, v in d.items())
+                           for d in my_file]
+                return [cls.create(**row) for row in my_file]
 
         except FileNotFoundError:
             return []
