@@ -71,9 +71,10 @@ class Base:
                 else:
                     new_instance = cls(1, 2)
             elif cls.__name__ == "Square":
-                if ("size" not in dictionary.keys() and\
-                    ('width' not in dictionary.keys()) and\
-                    ('height' not in dictionary.keys())):
+                if (
+                        "size" not in dictionary.keys()
+                        and ('width' not in dictionary.keys())
+                        and ('height' not in dictionary.keys())):
                     raise TypeError
                 else:
                     new_instance = cls(1)
