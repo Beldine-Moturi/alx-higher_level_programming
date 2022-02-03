@@ -120,14 +120,17 @@ class TestBaseMethods(unittest.TestCase):
 
         try:
             os.remove("Base.json")
+            os.remove("Base.csv")
         except IOError:
             pass
         try:
             os.remove("Rectangle.json")
+            os.remove("Rectangle.csv")
         except IOError:
             pass
         try:
             os.remove("Square.json")
+            os.remove("Square.csv")
         except IOError:
             pass
 
@@ -267,6 +270,62 @@ class TestBaseMethods(unittest.TestCase):
 
         with self.assertRaises(TypeError):
             Square.create(**s2)
+
+    def test_save_to_file_csv_method(self):
+        """Tests the csv Serialization method"""
+
+        r1 = None
+        r2 = []
+        r3 = Rectangle(4, 5, 1, 2, 24)
+        r4 = Rectangle(8, 9, 2, 3, 12)
+        s1 = Square(5, 1, 2, 12)
+        s2 = Square(8, 2, 3, 24)
+
+        Rectangle.save_to_file_csv(r1)
+        with open("Rectangle.csv", 'r') as f:
+            self.assertEqual(f.read(), "[]")
+
+        Rectangle.save_to_file_csv(r2)
+        with open("Rectangle.csv", 'r') as f:
+            self.assertEqual(f.read(), "[]")
+
+        Rectangle.save_to_file_csv([r3])
+        with open("Rectangle.csv", 'r') as f:
+            self.assertEqual("24,4,5,1,2\n", f.read())
+
+        Rectangle.save_to_file_csv([r3, r4])
+        with open("Rectangle.csv") as f:
+            self.assertEqual(f.read(), "24,4,5,1,2\n12,8,9,2,3\n")
+
+        Square.save_to_file_csv(r1)
+        with open("Square.csv") as f:
+            self.assertEqual(f.read(), "[]")
+
+        Square.save_to_file_csv(r2)
+        with open("Square.csv") as f:
+            self.assertEqual(f.read(), "[]")
+
+        Square.save_to_file_csv([s1])
+        with open("Square.csv") as f:
+            self.assertEqual(f.read(), "12,5,1,2\n")
+
+        Square.save_to_file_csv([s1, s2])
+        with open("Square.csv") as f:
+            self.assertEqual(f.read(), "12,5,1,2\n24,8,2,3\n")
+
+    def test_load_from_file_csv_method(self):
+        """Tests deserialization of Rectangle objects"""
+
+        r3 = Rectangle(5, 6, 1, 2, 12)
+        s1 = Square(5, 1, 2, 12)
+
+        Rectangle.save_to_file_csv([r3])
+        l3 = Rectangle.load_from_file_csv()
+        self.assertEqual(str(l3[0]), str(r3))
+
+        Square.save_to_file_csv([s1])
+        l6 = Square.load_from_file_csv()
+        self.assertEqual(str(l6[0]), str(s1))
 
 
 if __name__ == "__main__":
