@@ -18,7 +18,7 @@ if __name__ == "__main__":
 
     cur = db.cursor()
     cur.execute(
-        "SELECT cities.id, cities.name, states.name\
+        "SELECT cities.name\
  FROM cities\
  INNER JOIN states\
  ON cities.state_id = states.id\
@@ -26,8 +26,7 @@ if __name__ == "__main__":
  ORDER BY cities.id ASC;", (db_info[3], ))
 
     rows = cur.fetchall()
-    for row in rows:
-        print(row)
+    print(", ".join(city[0] for city in rows))
 
     cur.close()
     db.close()
