@@ -1,6 +1,7 @@
 #!/usr/bin/python3
 """
-Uses sqlalchemy to coonect to a database
+Defines a State model.
+Inherits from SQLAlchemy Base and links to the MySQL table states.
 """
 
 from sqlalchemy.ext.declarative import declarative_base
