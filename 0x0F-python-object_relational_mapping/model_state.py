@@ -1,9 +1,10 @@
 #!/usr/bin/python3
-"""Uses sqlalchemy to coonect to a database"""
+"""
+Uses sqlalchemy to coonect to a database
+"""
+
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import Column, String, Iteger
-import sys
-
 
 Base = declarative_base()
 
