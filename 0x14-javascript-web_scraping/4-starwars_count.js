@@ -10,12 +10,12 @@ request.get(url, (err, response, body) => {
     let count = 0;
     const movies = JSON.parse(body).results;
     for (const movie of movies) {
-	    const movieChars = movie.characters;
-	    for (const movieChar of movieChars) {
+      const movieChars = movie.characters;
+      for (const movieChar of movieChars) {
         if (movieChar.includes('18')) {
-		    count++;
+          count++;
         }
-	    }
+      }
     }
     console.log(count);
   } else {
